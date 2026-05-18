@@ -58,3 +58,13 @@
 .ds-page-layout .ds-nav-expand.is-collapsed {
   left: 77px;
 }
+
+.tickets-saved-view-button {
+  &__label {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}

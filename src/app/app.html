@@ -117,16 +117,16 @@
             </button>
             <div class="ds-subnav-header__children">
               @for (view of ticketSavedViews; track view.id) {
-                <div class="tickets-saved-view-item">
-                  <button class="ds-subnav-button"
-                    [class.is-selected]="ticketsNavItem === 'saved-view-' + view.id"
-                    (click)="ticketsNavItem = 'saved-view-' + view.id">{{ view.name }}</button>
+                <button class="ds-subnav-button tickets-saved-view-button"
+                  [class.is-selected]="ticketsNavItem === 'saved-view-' + view.id"
+                  (click)="ticketsNavItem = 'saved-view-' + view.id">
+                  <span class="tickets-saved-view-button__label">{{ view.name }}</span>
                   @if (view.ticketCount > 0) {
-                    <div class="tickets-saved-view-item__badge ds-badge-indicator ds-badge-indicator--grey" aria-hidden="true">
+                    <span class="ds-badge-indicator ds-badge-indicator--grey" aria-hidden="true">
                       {{ view.ticketCount > 999 ? '999+' : view.ticketCount }}
-                    </div>
+                    </span>
                   }
-                </div>
+                </button>
               }
             </div>
           </div>
