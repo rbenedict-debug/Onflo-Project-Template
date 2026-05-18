@@ -92,7 +92,7 @@
 
     <div class="ds-page-layout__body">
       <!-- Subnav — update labels and items for your project -->
-      <nav class="ds-subnav" role="navigation" aria-label="Section navigation">
+      <nav class="ds-subnav" [class.is-collapsed]="!subNavOpen" role="navigation" aria-label="Section navigation">
         <button class="ds-subnav-button is-selected" type="button" aria-pressed="true">Overview</button>
         <button class="ds-subnav-button" type="button" aria-pressed="false">Details</button>
       </nav>
@@ -103,8 +103,17 @@
   </div>
 
   <!-- Subnav expand/collapse toggle -->
-  <button class="ds-nav-expand" type="button" aria-label="Collapse sub navigation" aria-expanded="true">
-    <span class="ds-icon ds-icon--filled" aria-hidden="true">right_panel_open</span>
+  <button class="ds-nav-expand"
+          [class.is-collapsed]="!subNavOpen"
+          type="button"
+          [attr.aria-expanded]="subNavOpen"
+          [attr.aria-label]="subNavOpen ? 'Collapse navigation' : 'Expand navigation'"
+          (click)="subNavOpen = !subNavOpen">
+    @if (subNavOpen) {
+      <span class="ds-icon ds-icon--filled" aria-hidden="true">right_panel_open</span>
+    } @else {
+      <span class="ds-icon ds-icon--filled" aria-hidden="true">right_panel_close</span>
+    }
   </button>
 
 </div>
