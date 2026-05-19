@@ -15,13 +15,12 @@ seems to require it, never:
 - edit `package.json`, `angular.json`, or this `CLAUDE.md` to enable Material /
   AG Grid / Highcharts
 - import `Ds*Component`, `onfloTheme`, or anything from `@angular/material`
-- swap the AGENT-GUIDE-DESIGN.md reference below for AGENT-GUIDE.md
 
 When a request seems to need eng (real tables, live charts, reactive forms), build
 the closest static visual stand-in and mark it with `<!-- TODO eng: ... -->`. If you
 can't mock it, stop and say so — do not install eng dependencies as a workaround.
 
-@node_modules/@onflo/design-system/AGENT-GUIDE-DESIGN.md
+@node_modules/@onflo/design-system/AGENT-GUIDE.md
 
 ---
 
@@ -49,11 +48,10 @@ It is **not** a production engineering project.
 
 ## Component reference
 
-Per-component HTML markup lives at `node_modules/@onflo/design-system/.claude/examples/`.
-Read `.claude/examples/INDEX.md` first to see what's available, then read only the
-specific `{component}.html` files you need.
+The full component catalog and usage rules are in `AGENT-GUIDE.md` (loaded above via `@`).
+For deeper specs, read from `node_modules/@onflo/design-system/.claude/specs/` on demand —
+see §11 of `AGENT-GUIDE.md` for the index and when to read each file.
 
 For the human-readable visual catalog, open
 `node_modules/@onflo/design-system/preview/index.html` in a browser. Do **not**
-read that file from disk — it is 1.3 MB and the per-component snippets in
-`.claude/examples/` are the agent-friendly equivalent.
+read that file from disk — it is 1.3 MB.
