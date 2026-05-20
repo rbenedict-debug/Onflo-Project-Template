@@ -1,5 +1,7 @@
 import { Component, AfterViewInit, OnDestroy } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet, NavigationEnd } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { filter } from 'rxjs';
 
 type NavSection = 'tickets' | 'assets' | 'users' | 'analytics' | 'settings';
 
@@ -22,6 +24,23 @@ export class App implements AfterViewInit, OnDestroy {
   activeNav: NavSection = 'tickets';
 
   private _scrollCleanup: (() => void) | null = null;
+  private _routerSub: Subscription;
+
+  constructor(private readonly router: Router) {
+    this._syncNavFromUrl(router.url);
+    this._routerSub = router.events.pipe(
+      filter(e => e instanceof NavigationEnd)
+    ).subscribe(e => {
+      this._syncNavFromUrl((e as NavigationEnd).urlAfterRedirects);
+      if (this.activeNav === 'settings') setTimeout(() => this._setupSettingsScrollbar(), 0);
+    });
+  }
+
+  private _syncNavFromUrl(url: string): void {
+    const segment = url.split('/')[1]?.split('?')[0] as NavSection;
+    const valid: NavSection[] = ['tickets', 'assets', 'users', 'analytics', 'settings'];
+    this.activeNav = valid.includes(segment) ? segment : 'tickets';
+  }
 
   ngAfterViewInit(): void {
     if (this.activeNav === 'settings') setTimeout(() => this._setupSettingsScrollbar(), 0);
@@ -29,12 +48,12 @@ export class App implements AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     this._scrollCleanup?.();
+    this._routerSub.unsubscribe();
   }
 
   setNav(section: NavSection): void {
-    this.activeNav = section;
     this.subNavOpen = true;
-    if (section === 'settings') setTimeout(() => this._setupSettingsScrollbar(), 0);
+    this.router.navigate([section]);
   }
 
   private _setupSettingsScrollbar(): void {
