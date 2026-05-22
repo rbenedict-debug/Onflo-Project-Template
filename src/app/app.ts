@@ -2,8 +2,14 @@ import { Component, AfterViewInit, OnDestroy } from '@angular/core';
 import { Router, RouterOutlet, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs';
+import {
+  NavButtonComponent,
+  AgentStatusComponent,
+  NavTabComponent,
+  NavExpandComponent,
+} from '@onflo/design-system';
 
-type NavSection = 'tickets' | 'assets' | 'users' | 'analytics' | 'settings';
+type NavSection = 'home' | 'tickets' | 'assets' | 'users' | 'analytics' | 'settings';
 
 interface SettingsItem {
   id: string;
@@ -15,13 +21,19 @@ interface SettingsItem {
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [
+    RouterOutlet,
+    NavButtonComponent,
+    AgentStatusComponent,
+    NavTabComponent,
+    NavExpandComponent,
+  ],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
 export class App implements AfterViewInit, OnDestroy {
   subNavOpen = true;
-  activeNav: NavSection = 'tickets';
+  activeNav: NavSection = 'home';
 
   private _scrollCleanup: (() => void) | null = null;
   private _routerSub: Subscription;
@@ -37,9 +49,13 @@ export class App implements AfterViewInit, OnDestroy {
   }
 
   private _syncNavFromUrl(url: string): void {
-    const segment = url.split('/')[1]?.split('?')[0] as NavSection;
-    const valid: NavSection[] = ['tickets', 'assets', 'users', 'analytics', 'settings'];
-    this.activeNav = valid.includes(segment) ? segment : 'tickets';
+    const segment = url.split('/')[1]?.split('?')[0];
+    const valid: NavSection[] = ['home', 'tickets', 'assets', 'users', 'analytics', 'settings'];
+    if (!segment) {
+      this.activeNav = 'home';
+    } else {
+      this.activeNav = valid.includes(segment as NavSection) ? (segment as NavSection) : 'home';
+    }
   }
 
   ngAfterViewInit(): void {
@@ -53,7 +69,15 @@ export class App implements AfterViewInit, OnDestroy {
 
   setNav(section: NavSection): void {
     this.subNavOpen = true;
-    this.router.navigate([section]);
+    this.router.navigate([section === 'home' ? '' : section]);
+  }
+
+  get activeNavLabel(): string {
+    const labels: Record<NavSection, string> = {
+      home: 'Home', tickets: 'Tickets', assets: 'Assets',
+      users: 'Users', analytics: 'Analytics', settings: 'Settings',
+    };
+    return labels[this.activeNav];
   }
 
   private _setupSettingsScrollbar(): void {

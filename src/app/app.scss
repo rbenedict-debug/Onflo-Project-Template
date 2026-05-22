@@ -45,19 +45,6 @@
   }
 }
 
-// ds-nav-expand positioning is in the Angular component styles, not in onflo.css.
-// Replicate it here so the CSS class API version anchors to the subnav edge.
-.ds-page-layout .ds-nav-expand {
-  position: absolute;
-  top: 87px;
-  left: 270px;
-  z-index: 10;
-  transition: left .2s ease;
-}
-
-.ds-page-layout .ds-nav-expand.is-collapsed {
-  left: 77px;
-}
 
 .tickets-saved-view-button {
   &__label {

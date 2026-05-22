@@ -10,58 +10,16 @@
       </svg>
     </div>
     <div class="ds-nav-sidebar__nav">
-      <button class="ds-nav-button" [class.is-selected]="activeNav === 'tickets'"
-              type="button" [attr.aria-pressed]="activeNav === 'tickets'" aria-label="Tickets"
-              (click)="setNav('tickets')">
-        <span class="ds-icon ds-icon--filled" aria-hidden="true">inbox</span>
-        <span class="ds-nav-button__label">Tickets</span>
-      </button>
-      <button class="ds-nav-button" [class.is-selected]="activeNav === 'assets'"
-              type="button" [attr.aria-pressed]="activeNav === 'assets'" aria-label="Assets"
-              (click)="setNav('assets')">
-        <span class="ds-icon" aria-hidden="true">desktop_mac</span>
-        <span class="ds-nav-button__label">Assets</span>
-      </button>
-      <button class="ds-nav-button" [class.is-selected]="activeNav === 'users'"
-              type="button" [attr.aria-pressed]="activeNav === 'users'" aria-label="Users"
-              (click)="setNav('users')">
-        <span class="ds-icon" aria-hidden="true">group</span>
-        <span class="ds-nav-button__label">Users</span>
-      </button>
-      <button class="ds-nav-button" [class.is-selected]="activeNav === 'analytics'"
-              type="button" [attr.aria-pressed]="activeNav === 'analytics'" aria-label="Analytics"
-              (click)="setNav('analytics')">
-        <span class="ds-icon" aria-hidden="true">equalizer</span>
-        <span class="ds-nav-button__label">Analytics</span>
-      </button>
-      <button class="ds-nav-button" [class.is-selected]="activeNav === 'settings'"
-              type="button" [attr.aria-pressed]="activeNav === 'settings'" aria-label="Settings"
-              (click)="setNav('settings')">
-        <span class="ds-icon ds-icon--filled" aria-hidden="true">settings</span>
-        <span class="ds-nav-button__label">Settings</span>
-      </button>
+      <ds-nav-button type="home"      aria-label="Home"      [selected]="activeNav === 'home'"      (click)="setNav('home')"      />
+      <ds-nav-button type="tickets"   aria-label="Tickets"   [selected]="activeNav === 'tickets'"   (click)="setNav('tickets')"  />
+      <ds-nav-button type="assets"    aria-label="Assets"    [selected]="activeNav === 'assets'"    (click)="setNav('assets')"   />
+      <ds-nav-button type="users"     aria-label="Users"     [selected]="activeNav === 'users'"     (click)="setNav('users')"    />
+      <ds-nav-button type="analytics" aria-label="Analytics" [selected]="activeNav === 'analytics'" (click)="setNav('analytics')" />
+      <ds-nav-button type="settings"  aria-label="Settings"  [selected]="activeNav === 'settings'"  (click)="setNav('settings')" />
     </div>
     <div class="ds-nav-sidebar__bottom">
-      <button class="ds-agent-status" type="button" aria-pressed="true" aria-label="Call agent status: Online">
-        <div class="ds-agent-status__icon">
-          <span class="ds-icon" aria-hidden="true">support_agent</span>
-        </div>
-        <div class="ds-agent-status__status">
-          <span>Online</span>
-          <span class="ds-icon" aria-hidden="true">keyboard_arrow_down</span>
-        </div>
-        <span class="ds-agent-status__indicator" aria-hidden="true"></span>
-      </button>
-      <button class="ds-agent-status is-offline" type="button" aria-pressed="false" aria-label="Live agent status: Offline">
-        <div class="ds-agent-status__icon">
-          <span class="ds-icon" aria-hidden="true">forum</span>
-        </div>
-        <div class="ds-agent-status__status">
-          <span>Offline</span>
-          <span class="ds-icon" aria-hidden="true">keyboard_arrow_down</span>
-        </div>
-        <span class="ds-agent-status__indicator" aria-hidden="true"></span>
-      </button>
+      <ds-agent-status />
+      <ds-agent-status />
     </div>
   </nav>
 
@@ -69,14 +27,7 @@
   <div class="ds-page-layout__content">
     <header class="ds-top-nav" role="banner">
       <div class="ds-top-nav__tabs">
-        <div class="ds-nav-tab is-active" role="button" tabindex="0" aria-pressed="true" aria-label="Home tab — active">
-          <div class="ds-nav-tab__content">
-            <span class="ds-nav-tab__label">Home</span>
-            <button class="ds-nav-tab__close" type="button" aria-label="Close Home tab">
-              <span class="ds-icon" aria-hidden="true">close_small</span>
-            </button>
-          </div>
-        </div>
+        <ds-nav-tab [active]="true">{{ activeNavLabel }}</ds-nav-tab>
       </div>
       <div class="ds-top-nav__actions">
         <button class="ds-top-nav__action-btn" type="button" aria-label="Chatsy">
@@ -502,18 +453,6 @@
     </div>
   </div>
 
-  <!-- Subnav expand/collapse toggle -->
-  <button class="ds-nav-expand"
-          [class.is-collapsed]="!subNavOpen"
-          type="button"
-          [attr.aria-expanded]="subNavOpen"
-          [attr.aria-label]="subNavOpen ? 'Collapse navigation' : 'Expand navigation'"
-          (click)="subNavOpen = !subNavOpen">
-    @if (subNavOpen) {
-      <span class="ds-icon ds-icon--filled" aria-hidden="true">right_panel_open</span>
-    } @else {
-      <span class="ds-icon ds-icon--filled" aria-hidden="true">right_panel_close</span>
-    }
-  </button>
+  <ds-nav-expand [open]="subNavOpen" (toggle)="subNavOpen = !subNavOpen" />
 
 </div>

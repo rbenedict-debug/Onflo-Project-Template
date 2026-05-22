@@ -20,7 +20,7 @@ When a request seems to need eng (real tables, live charts, reactive forms), bui
 the closest static visual stand-in and mark it with `<!-- TODO eng: ... -->`. If you
 can't mock it, stop and say so — do not install eng dependencies as a workaround.
 
-@node_modules/@onflo/design-system/AGENT-GUIDE.md
+@node_modules/@onflo/design-system/AGENT-GUIDE-DESIGN.md
 
 ---
 
@@ -48,9 +48,9 @@ It is **not** a production engineering project.
 
 ## Component reference
 
-The full component catalog and usage rules are in `AGENT-GUIDE.md` (loaded above via `@`).
+The full component catalog and usage rules are in `AGENT-GUIDE-DESIGN.md` (loaded above via `@`).
 For deeper specs, read from `node_modules/@onflo/design-system/.claude/specs/` on demand —
-see §11 of `AGENT-GUIDE.md` for the index and when to read each file.
+see §10 of `AGENT-GUIDE-DESIGN.md` for the index and when to read each file.
 
 For the human-readable visual catalog, open
 `node_modules/@onflo/design-system/preview/index.html` in a browser. Do **not**
