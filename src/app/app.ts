@@ -3,7 +3,7 @@ import { Router, RouterOutlet, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs';
 
-type NavSection = 'home' | 'tickets' | 'assets' | 'users' | 'analytics' | 'settings';
+type NavSection = 'tickets' | 'assets' | 'users' | 'analytics' | 'settings';
 
 interface SettingsItem {
   id: string;
@@ -21,7 +21,7 @@ interface SettingsItem {
 })
 export class App implements AfterViewInit, OnDestroy {
   subNavOpen = true;
-  activeNav: NavSection = 'home';
+  activeNav: NavSection = 'tickets';
 
   private _scrollCleanup: (() => void) | null = null;
   private _routerSub: Subscription;
@@ -38,11 +38,11 @@ export class App implements AfterViewInit, OnDestroy {
 
   private _syncNavFromUrl(url: string): void {
     const segment = url.split('/')[1]?.split('?')[0];
-    const valid: NavSection[] = ['home', 'tickets', 'assets', 'users', 'analytics', 'settings'];
+    const valid: NavSection[] = ['tickets', 'assets', 'users', 'analytics', 'settings'];
     if (!segment) {
-      this.activeNav = 'home';
+      this.activeNav = 'tickets';
     } else {
-      this.activeNav = valid.includes(segment as NavSection) ? (segment as NavSection) : 'home';
+      this.activeNav = valid.includes(segment as NavSection) ? (segment as NavSection) : 'tickets';
     }
   }
 
@@ -57,12 +57,12 @@ export class App implements AfterViewInit, OnDestroy {
 
   setNav(section: NavSection): void {
     this.subNavOpen = true;
-    this.router.navigate([section === 'home' ? '' : section]);
+    this.router.navigate([section]);
   }
 
   get activeNavLabel(): string {
     const labels: Record<NavSection, string> = {
-      home: 'Home', tickets: 'Tickets', assets: 'Assets',
+      tickets: 'Tickets', assets: 'Assets',
       users: 'Users', analytics: 'Analytics', settings: 'Settings',
     };
     return labels[this.activeNav];
