@@ -45,6 +45,17 @@
   }
 }
 
+.ds-page-layout .ds-nav-expand {
+  position: absolute;
+  top: 87px;
+  left: 270px;
+  z-index: 10;
+  transition: left .2s ease;
+}
+
+.ds-page-layout .ds-nav-expand.is-collapsed {
+  left: 77px;
+}
 
 .tickets-saved-view-button {
   &__label {

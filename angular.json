@@ -33,7 +33,7 @@
               "node_modules/@onflo/design-system/dist/onflo.css",
               "src/styles.scss"
             ],
-            "externalDependencies": ["ag-grid-community", "highcharts"],
+            "externalDependencies": ["ag-grid-community", "highcharts"]
           },
           "configurations": {
             "production": {

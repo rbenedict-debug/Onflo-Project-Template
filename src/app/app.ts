@@ -2,12 +2,6 @@ import { Component, AfterViewInit, OnDestroy } from '@angular/core';
 import { Router, RouterOutlet, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs';
-import {
-  NavButtonComponent,
-  AgentStatusComponent,
-  NavTabComponent,
-  NavExpandComponent,
-} from '@onflo/design-system';
 
 type NavSection = 'home' | 'tickets' | 'assets' | 'users' | 'analytics' | 'settings';
 
@@ -21,13 +15,7 @@ interface SettingsItem {
 
 @Component({
   selector: 'app-root',
-  imports: [
-    RouterOutlet,
-    NavButtonComponent,
-    AgentStatusComponent,
-    NavTabComponent,
-    NavExpandComponent,
-  ],
+  imports: [RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
